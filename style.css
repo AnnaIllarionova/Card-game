@@ -1,0 +1,88 @@
+@font-face {
+  font-family: "stratosskyeng";
+  src: url(fonts/Web\ fonts/stratosskyengweb-regular.woff) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.center {
+  padding-left: calc(50% - 488px);
+  padding-right: calc(50% - 488px);
+}
+
+.difficulties {
+  min-height: 774px;
+  background-color: #004980;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.difficulties-box {
+  background-color: #C2F5FF;
+  width: 480px;
+  height: 459px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.difficulties-box__text {
+  padding-bottom: 48px;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: StratosSkyeng;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 48px;
+  width: 208px;
+  text-align: center;
+  color: #004980;
+}
+.difficulties-box__button_start {
+  border-radius: 12px;
+  background: var(--salad-60, #7AC100);
+  width: 246px;
+  height: 48px;
+  border: none;
+  color: #FFF;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: StratosSkyeng;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  transition: all 0.3s;
+}
+.difficulties-box__button_start:hover {
+  background: #FFF;
+  color: #7AC100;
+}
+.difficulties-level {
+  display: flex;
+  -moz-column-gap: 24px;
+       column-gap: 24px;
+  padding-bottom: 67px;
+}
+.difficulties-level__button {
+  border-radius: 12px;
+  background: #FFF;
+  width: 98px;
+  height: 98px;
+  border: none;
+  color: var(--blue-100, #0080C1);
+  text-align: center;
+  font-family: StratosSkyeng;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 72px; /* 112.5% */
+  transition: transform 0.5s;
+}
+.difficulties-level__button:hover {
+  transform: scale(1.05);
+}/*# sourceMappingURL=style.css.map */
