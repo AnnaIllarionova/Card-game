@@ -1,4 +1,9 @@
+import { renderEasyLevelPage } from "./level-pages/easy-level-page.js";
+import { renderHardLevelPage } from "./level-pages/hard-level-page.js";
+import { renderMediumLevelPage } from "./level-pages/medium-level-page.js";
+
 export const gamePage = document.querySelector(".difficulties.center");
+export let level = "";
 
 export function renderMainPage() {
   const mainPage = `
@@ -17,9 +22,6 @@ export function renderMainPage() {
 
   const startButton = document.querySelector(".difficulties-box__button_start");
   const levelButtons = document.querySelectorAll(".difficulties-level__button");
-  const easyLevelButton = document.getElementById("easy-level");
-  const mediumLevelButton = document.getElementById("medium-level");
-  const hardLevelButton = document.getElementById("hard-level");
 
   for (const levelButton of levelButtons) {
     levelButton.addEventListener("click", () => {
@@ -36,15 +38,19 @@ export function renderMainPage() {
       }
 
       startButton.addEventListener("click", () => {
-        if (easyLevelButton === levelButton) {
-          window.location.href = "http://127.0.0.1:5500/easy-level.html";
+        if ((levelButton.id === "easy-level")) {
+          //console.log(levelButton.id);
+          level = 'easy';
+          renderEasyLevelPage({ gamePage});
         }
 
-        if (mediumLevelButton === levelButton) {
-          window.location.href = "http://127.0.0.1:5500/medium-level.html";
+        if ((levelButton.id === "medium-level")) {
+          level = 'medium';
+          renderMediumLevelPage({ gamePage });
         }
-        if (hardLevelButton === levelButton) {
-          window.location.href = "http://127.0.0.1:5500/hard-level.html";
+        if ((levelButton.id === "hard-level")) {
+          level = 'hard';
+          renderHardLevelPage({ gamePage });
         }
       });
     });
