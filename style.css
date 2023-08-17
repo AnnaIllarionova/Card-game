@@ -18,11 +18,12 @@
   min-height: 774px;
   background-color: #004980;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 .difficulties-box {
-  background-color: #C2F5FF;
+  background-color: #c2f5ff;
   width: 480px;
   height: 459px;
   border-radius: 12px;
@@ -43,13 +44,13 @@
   text-align: center;
   color: #004980;
 }
-.difficulties-box__button_start {
+.difficulties-box__button_start, .difficulties-box__button_again {
   border-radius: 12px;
-  background: var(--salad-60, #7AC100);
+  background: var(--salad-60, #7ac100);
   width: 246px;
   height: 48px;
   border: none;
-  color: #FFF;
+  color: #fff;
   font-variant-numeric: lining-nums proportional-nums;
   font-family: StratosSkyeng;
   font-size: 24px;
@@ -58,9 +59,12 @@
   line-height: 32px;
   transition: all 0.3s;
 }
-.difficulties-box__button_start:hover {
-  background: #FFF;
-  color: #7AC100;
+.difficulties-box__button_start:hover, .difficulties-box__button_again:hover {
+  background: #fff;
+  color: #7ac100;
+}
+.difficulties-box__button_start-again, .difficulties-box__button_again-again {
+  margin-bottom: 12px;
 }
 .difficulties-level {
   display: flex;
@@ -70,11 +74,11 @@
 }
 .difficulties-level__button {
   border-radius: 12px;
-  background: #FFF;
+  background: #fff;
   width: 98px;
   height: 98px;
   border: none;
-  color: var(--blue-100, #0080C1);
+  color: var(--blue-100, #0080c1);
   text-align: center;
   font-family: StratosSkyeng;
   font-size: 64px;
@@ -88,11 +92,11 @@
 }
 .difficulties-level__button-active {
   border-radius: 12px;
-  background: #7AC100;
+  background-color: #7ac100;
   width: 98px;
   height: 98px;
   border: none;
-  color: var(--blue-100, #0080C1);
+  color: var(--blue-100, #0080c1);
   text-align: center;
   font-family: StratosSkyeng;
   font-size: 64px;
@@ -100,4 +104,62 @@
   font-weight: 400;
   line-height: 72px; /* 112.5% */
   transform: scale(1.05);
+}
+
+.playing-field {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 35px;
+  padding-top: 22px;
+  height: 91px;
+}
+
+.timer {
+  width: 155px;
+}
+.timer__text {
+  display: flex;
+  flex-direction: row;
+  padding-left: 39px;
+  justify-content: space-between;
+}
+.timer__text_min, .timer__text_sek {
+  color: #fff;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: StratosSkyeng;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+.timer__numbers {
+  color: #fff;
+  font-family: StratosSkyeng;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 64px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 15px;
+}
+.cards__shirt {
+  grid-column: 1fr;
+  width: 100%;
+}
+.cards__easy {
+  grid-template-columns: repeat(4, 1fr);
+}
+.cards__medium {
+  grid-template-columns: repeat(6, 1fr);
 }/*# sourceMappingURL=style.css.map */

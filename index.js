@@ -29,7 +29,7 @@ export function renderMainPage() {
       const isActive = levelButton.classList.contains(
         "difficulties-level__button-active"
       );
-      //console.log(isActive);
+      console.log(isActive);
 
       for (const btn of levelButtons) {
         if (btn !== levelButton) {
@@ -38,18 +38,18 @@ export function renderMainPage() {
       }
 
       startButton.addEventListener("click", () => {
-        if ((levelButton.id === "easy-level")) {
+        if (levelButton.id === "easy-level") {
           //console.log(levelButton.id);
-          level = 'easy';
-          renderEasyLevelPage({ gamePage});
+          level = "easy";
+          renderEasyLevelPage({ gamePage });
         }
 
-        if ((levelButton.id === "medium-level")) {
-          level = 'medium';
+        if (levelButton.id === "medium-level") {
+          level = "medium";
           renderMediumLevelPage({ gamePage });
         }
-        if ((levelButton.id === "hard-level")) {
-          level = 'hard';
+        if (levelButton.id === "hard-level") {
+          level = "hard";
           renderHardLevelPage({ gamePage });
         }
       });
