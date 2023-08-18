@@ -1,6 +1,7 @@
-import { renderEasyLevelPage } from "./level-pages/easy-level-page.js";
-import { renderHardLevelPage } from "./level-pages/hard-level-page.js";
-import { renderMediumLevelPage } from "./level-pages/medium-level-page.js";
+// import { renderEasyLevelPage } from "./level-pages/easy-level-page.js";
+// import { renderHardLevelPage } from "./level-pages/hard-level-page.js";
+// import { renderMediumLevelPage } from "./level-pages/medium-level-page.js";
+import { renderLevelPage } from "./level-pages/level-page.js";
 
 export const gamePage = document.querySelector(".difficulties.center");
 export let level = "";
@@ -41,16 +42,16 @@ export function renderMainPage() {
         if (levelButton.id === "easy-level") {
           //console.log(levelButton.id);
           level = "easy";
-          renderEasyLevelPage({ gamePage });
+          renderLevelPage({ gamePage });
         }
 
         if (levelButton.id === "medium-level") {
           level = "medium";
-          renderMediumLevelPage({ gamePage });
+          renderLevelPage({ gamePage });
         }
         if (levelButton.id === "hard-level") {
           level = "hard";
-          renderHardLevelPage({ gamePage });
+          renderLevelPage({ gamePage });
         }
       });
     });
