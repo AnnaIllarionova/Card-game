@@ -1,8 +1,8 @@
-import { renderMainPage, level } from "../index.js";
+import { renderMainPage, level } from "./index.js";
 
 export const renderLevelPage = ({ gamePage }) => {
-  const levelHtml = `
-  <div class="playing-field">
+    const levelHtml = `
+  <div class="field">
     <div class="header">
       <div class="timer">
       <div class="timer__text">
@@ -11,22 +11,22 @@ export const renderLevelPage = ({ gamePage }) => {
       </div>
         <p class="timer__numbers">00.00</p>
       </div>
-        <button class="difficulties-box__button_again" id="start-over-button">Начать заново</button>
+        <button class="level__button_again" id="start-over-button">Начать заново</button>
     </div>
     <div class="render-cards"></div>
     <a class="back-link">Вернуться назад</a>
   </div>
   `;
 
-  gamePage.innerHTML = levelHtml;
+    gamePage.innerHTML = levelHtml;
 
-  const renderCardsElement = document.querySelector(".render-cards");
-  const backLink = document.querySelector(".back-link");
-  const startOverButton = document.getElementById("start-over-button");
-  let isNotReversed = true;
+    const renderCardsElement = document.querySelector(".render-cards");
+    const backLink = document.querySelector(".back-link");
+    const startOverButton = document.getElementById("start-over-button");
+    let isNotReversed = true;
 
-  if (level === "easy") {
-    const cardsForEasyLevel = `
+    if (level === "easy") {
+        const cardsForEasyLevel = `
     <div class="cards cards__easy">
       <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
       <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
@@ -46,11 +46,11 @@ export const renderLevelPage = ({ gamePage }) => {
       <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
     </div>
     `;
-    renderCardsElement.innerHTML = cardsForEasyLevel;
-  }
+        renderCardsElement.innerHTML = cardsForEasyLevel;
+    }
 
-  if (level === "medium") {
-    const cardsForMediumLevel = `
+    if (level === "medium") {
+        const cardsForMediumLevel = `
     <div class="cards cards__medium">
     <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
     <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
@@ -78,11 +78,11 @@ export const renderLevelPage = ({ gamePage }) => {
     <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
     </div>
     `;
-    renderCardsElement.innerHTML = cardsForMediumLevel;
-  }
+        renderCardsElement.innerHTML = cardsForMediumLevel;
+    }
 
-  if (level === "hard") {
-    const cardsForHardLevel = `
+    if (level === "hard") {
+        const cardsForHardLevel = `
     <div class="cards">
     <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
     <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
@@ -122,13 +122,13 @@ export const renderLevelPage = ({ gamePage }) => {
     <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
     </div>
     `;
-    renderCardsElement.innerHTML = cardsForHardLevel;
-  }
+        renderCardsElement.innerHTML = cardsForHardLevel;
+    }
 
-  startOverButton.addEventListener("click", () => {
-    console.log(level);
-    if (isNotReversed) {
-      const levelCardsHtml = `
+    startOverButton.addEventListener("click", () => {
+        console.log(level);
+        if (isNotReversed) {
+            const levelCardsHtml = `
     <div class="playing-field">
     <div class="header">
       <div class="timer">
@@ -138,18 +138,18 @@ export const renderLevelPage = ({ gamePage }) => {
       </div>
         <p class="timer__numbers">00.00</p>
       </div>
-        <button class="difficulties-box__button_again" id="start-reverse-button">Перевернуть карты</button>
+        <button class="level__button_again" id="start-reverse-button">Перевернуть карты</button>
     </div>
     <div class="render-cards"></div>
     
   </div>
     `;
-      gamePage.innerHTML = levelCardsHtml;
-      isNotReversed = false;
-      const renderCardsElement = document.querySelector(".render-cards");
+            gamePage.innerHTML = levelCardsHtml;
+            isNotReversed = false;
+            const renderCardsElement = document.querySelector(".render-cards");
 
-      if (level === "easy") {
-        const cardsForEasyLevelHtml = `
+            if (level === "easy") {
+                const cardsForEasyLevelHtml = `
         <div class="cards cards__easy">
         <img class="cards__shirt" src="img/туз пики.png" alt="карта">
         <img class="cards__shirt" src="img/король пики.png" alt="карта">
@@ -169,11 +169,11 @@ export const renderLevelPage = ({ gamePage }) => {
         <img class="cards__shirt" src="img/валет крести.png" alt="карта">
         </div>
         `;
-        renderCardsElement.innerHTML = cardsForEasyLevelHtml;
-      }
+                renderCardsElement.innerHTML = cardsForEasyLevelHtml;
+            }
 
-      if (level === "medium") {
-        const cardsForMediumLevelHtml = `
+            if (level === "medium") {
+                const cardsForMediumLevelHtml = `
         <div class="cards cards__medium">
         <img class="cards__shirt" src="img/туз пики.png" alt="карта">
         <img class="cards__shirt" src="img/король пики.png" alt="карта">
@@ -187,7 +187,7 @@ export const renderLevelPage = ({ gamePage }) => {
         <img class="cards__shirt" src="img/валет черви.png" alt="карта">
         <img class="cards__shirt" src="img/10 черви.png" alt="карта">
         <img class="cards__shirt" src="img/9 черви.png" alt="карта">
-        <img class="cards__shirt" src="img/король бубны.png" alt="карта">
+        <img class="cards__shirt" src="img/туз бубны.png" alt="карта">
         <img class="cards__shirt" src="img/король бубны.png" alt="карта">
         <img class="cards__shirt" src="img/дама бубны.png" alt="карта">
         <img class="cards__shirt" src="img/валет бубны.png" alt="карта">
@@ -201,61 +201,61 @@ export const renderLevelPage = ({ gamePage }) => {
         <img class="cards__shirt" src="img/9 крести.png" alt="карта">
         </div>
         `;
-        renderCardsElement.innerHTML = cardsForMediumLevelHtml;
-      }
+                renderCardsElement.innerHTML = cardsForMediumLevelHtml;
+            }
 
-      if (level === "hard") {
-        const cardsForHardLevelHtml = `
+            if (level === "hard") {
+                const cardsForHardLevelHtml = `
         <div class="cards">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
-        <img class="cards__shirt" src="img/рубашка.png" alt="рубашка">
+        <img class="cards__shirt" src="img/туз пики.png" alt="карта">
+        <img class="cards__shirt" src="img/король пики.png" alt="карта">
+        <img class="cards__shirt" src="img/дама пики.png" alt="карта">
+        <img class="cards__shirt" src="img/валет пики.png" alt="карта">
+        <img class="cards__shirt" src="img/10 пики.png" alt="карта">
+        <img class="cards__shirt" src="img/9 пики.png" alt="карта">
+        <img class="cards__shirt" src="img/8 пики.png" alt="карта">
+        <img class="cards__shirt" src="img/7 пики.png" alt="карта">
+        <img class="cards__shirt" src="img/6 пики.png" alt="карта">
+        <img class="cards__shirt" src="img/туз черви.png" alt="карта">
+        <img class="cards__shirt" src="img/король черви.png" alt="карта">
+        <img class="cards__shirt" src="img/дама черви.png" alt="карта">
+        <img class="cards__shirt" src="img/валет черви.png" alt="карта">
+        <img class="cards__shirt" src="img/10 черви.png" alt="карта">
+        <img class="cards__shirt" src="img/9 черви.png" alt="карта">
+        <img class="cards__shirt" src="img/8 черви.png" alt="карта">
+        <img class="cards__shirt" src="img/7 черви.png" alt="карта">
+        <img class="cards__shirt" src="img/6 черви.png" alt="карта">
+        <img class="cards__shirt" src="img/туз бубны.png" alt="карта">
+        <img class="cards__shirt" src="img/король бубны.png" alt="карта">
+        <img class="cards__shirt" src="img/дама бубны.png" alt="карта">
+        <img class="cards__shirt" src="img/валет бубны.png" alt="карта">
+        <img class="cards__shirt" src="img/10 бубны.png" alt="карта">
+        <img class="cards__shirt" src="img/9 бубны.png" alt="карта">
+        <img class="cards__shirt" src="img/8 бубны.png" alt="карта">
+        <img class="cards__shirt" src="img/7 бубны.png" alt="карта">
+        <img class="cards__shirt" src="img/6 бубны.png" alt="карта">
+        <img class="cards__shirt" src="img/туз крести.png" alt="карта">
+        <img class="cards__shirt" src="img/король крести.png" alt="карта">
+        <img class="cards__shirt" src="img/дама крести.png" alt="карта">
+        <img class="cards__shirt" src="img/валет крести.png" alt="карта">
+        <img class="cards__shirt" src="img/10 крести.png" alt="карта">
+        <img class="cards__shirt" src="img/9 крести.png" alt="карта">
+        <img class="cards__shirt" src="img/8 крести.png" alt="карта">
+        <img class="cards__shirt" src="img/7 крести.png" alt="карта">
+        <img class="cards__shirt" src="img/6 крести.png" alt="карта">
         </div>
         `;
-        renderCardsElement.innerHTML = cardsForHardLevelHtml;
-      }
-    }
-    const reverseButton = document.getElementById("start-reverse-button");
-    reverseButton.addEventListener("click", () => {
-      isNotReversed = true;
-      renderLevelPage({ gamePage });
+                renderCardsElement.innerHTML = cardsForHardLevelHtml;
+            }
+        }
+        const reverseButton = document.getElementById("start-reverse-button");
+        reverseButton.addEventListener("click", () => {
+            isNotReversed = true;
+            renderLevelPage({ gamePage });
+        });
     });
-  });
 
-  backLink.addEventListener("click", () => {
-    renderMainPage();
-  });
+    backLink.addEventListener("click", () => {
+        renderMainPage();
+    });
 };
