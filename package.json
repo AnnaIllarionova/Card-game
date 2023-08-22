@@ -1,0 +1,40 @@
+{
+    "name": "card-game",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "http-server -p 30004",
+        "format": "prettier --write ./level-pages/",
+        "lint:js": "eslint ./level-pages/**/*.js",
+        "lint:css": "stylelint ./level-pages/**/*.css",
+        "lint": "npm run lint:js && npm run lint:css",
+        "prepare": "husky install"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/AnnaIllarionova/Card-game.git"
+    },
+    "author": "Anna Illarionova",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/AnnaIllarionova/Card-game/issues"
+    },
+    "homepage": "https://github.com/AnnaIllarionova/Card-game#readme",
+    "dependencies": {
+        "http-server": "^14.1.1",
+        "lodash": "^4.17.21"
+    },
+    "devDependencies": {
+        "axios": "^1.4.0",
+        "eslint": "^8.47.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-prettier": "^5.0.0",
+        "husky": "^8.0.3",
+        "prettier": "^3.0.2",
+        "stylelint": "^15.10.2",
+        "stylelint-config-standard": "^34.0.0",
+        "stylelint-prettier": "^4.0.2"
+    }
+}
