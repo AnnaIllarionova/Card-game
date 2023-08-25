@@ -1,4 +1,5 @@
 import { renderLevelPage } from "./level-page.js";
+import "./style.css";
 
 export const gamePage = document.querySelector(".difficulties.center");
 export let level = "";
