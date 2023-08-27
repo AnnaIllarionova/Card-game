@@ -100,7 +100,7 @@ export const renderLevelPage = ({ gamePage }) => {
       </div>
         <p class="timer__numbers">00.00</p>
       </div>
-        <button class="level__button_again" id="start-reverse-button">Перевернуть карты</button>
+        <button class="level__button_again" id="start-reverse-button">Начать заново</button>
     </div>
     <div class="render-cards"></div>
   </div>
@@ -122,10 +122,11 @@ export const renderLevelPage = ({ gamePage }) => {
         const sliceCardArray = cardsArray.slice(0, cardsCounter / 2);
         const doubleCardArray = sliceCardArray.concat(sliceCardArray);
         doubleCardArray.sort(() => Math.random() - 0.5);
+        const cardsInGame = [];
 
         for (let i = 0; i < cardsCounter; i++) {
             const newCard = `
-              <div class="generated-card">
+              <div class="generated-card" data-index="${i}">
                 <div class="generated-card__corner">
                   <p class="generated-card__text">${doubleCardArray[i].rank}</p>
                   <div class="generated-card__corner_svg">
@@ -143,10 +144,11 @@ export const renderLevelPage = ({ gamePage }) => {
                 </div>
               </div>`;
             cardsForLevel += newCard;
+            cardsInGame.push(newCard);
         }
-
         cardsForLevel += "</div>";
         renderCardsElement.innerHTML = cardsForLevel;
+        // console.log(cardsForLevel);
         const flippedCards = document.querySelectorAll(".generated-card");
 
         flippedCards.forEach((card) => {
@@ -157,14 +159,69 @@ export const renderLevelPage = ({ gamePage }) => {
             flippedCards.forEach((card) => {
                 card.innerHTML =
                     '<img class="cards__shirt" src="static/рубашка.png" alt="рубашка"/>';
+                card.classList.remove("flipped");
             });
         }, 5000);
 
         // let isCardFlipped;
+        let firstCard = null;
+        let secondCard = null;
+        let firstCardRank = null;
+        let firstCardSuit = null;
+        let secondCardRank = null;
+        let secondCardSuit = null;
 
         flippedCards.forEach((card) => {
             card.addEventListener("click", () => {
-                console.log("click");
+                const index = card.dataset.index;
+                card.innerHTML = cardsInGame[index];
+                card.classList.add("flipped");
+
+                if (firstCard === null) {
+                    firstCard = card;
+                    firstCardRank = doubleCardArray[index].rank;
+                    firstCardSuit = doubleCardArray[index].suit;
+                } else if (secondCard === null) {
+                    secondCard = card;
+                    secondCardRank = doubleCardArray[index].rank;
+                    secondCardSuit = doubleCardArray[index].suit;
+                }
+
+                if (firstCard !== null && secondCard !== null) {
+                    if (
+                        firstCardRank === secondCardRank &&
+                        firstCardSuit === secondCardSuit
+                    ) {
+                        firstCard.disabled = true;
+                        secondCard.disabled = true;
+                        firstCard = null;
+                        secondCard = null;
+                    }
+                }
+
+                if (firstCard !== null && secondCard !== null) {
+                    if (
+                        firstCardRank !== secondCardRank ||
+                        firstCardSuit !== secondCardSuit
+                    ) {
+                        card.disabled = true;
+                        setTimeout(() => {
+                            alert("Вы проиграли!");
+                        }, 500);
+                    }
+                }
+                if (
+                    document.querySelectorAll(".generated-card.flipped")
+                        .length === cardsInGame.length
+                ) {
+                    setTimeout(() => {
+                        alert("Вы выиграли!");
+                    }, 500);
+                }
+                console.log(
+                    document.querySelectorAll(".generated-card.flipped"),
+                );
+                console.log(cardsInGame.length);
             });
         });
 
