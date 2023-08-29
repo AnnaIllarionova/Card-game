@@ -49,6 +49,40 @@
     color: #004980;
 }
 
+.level__text_result {
+    width: 276px;
+    padding-top: 8px;
+    padding-bottom: 28px;
+}
+
+.level__time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 40px;
+}
+
+.level__time_text {
+    color: #000;
+    font-variant-numeric: lining-nums proportional-nums;
+    font-family: StratosSkyeng, sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 32px;
+}
+
+.timer__time_numbers {
+    color: #000;
+    font-family: StratosSkyeng, sans-serif;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 72px;
+}
+
 .level__button_start,
 .level__button_again {
     border-radius: 12px;
@@ -155,6 +189,10 @@
     font-weight: 400;
 }
 
+.timer__box {
+    display: flex;
+}
+
 .timer__numbers {
     color: #fff;
     font-family: StratosSkyeng, sans-serif;
@@ -189,6 +227,10 @@
     border-radius: 4px;
     background: white;
     position: relative;
+}
+
+.generated-card__matched {
+    background: greenyellow;
 }
 
 .generated-card__text {

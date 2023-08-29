@@ -1,5 +1,7 @@
 //import { forEach, slice } from "lodash";
 import { renderMainPage, level } from "./index.js";
+import { renderGameField } from "./render-game-field.js";
+import { useMainGameLogic } from "./main-game-logic.js";
 
 export const renderLevelPage = ({ gamePage }) => {
     const levelHtml = `
@@ -15,14 +17,12 @@ export const renderLevelPage = ({ gamePage }) => {
         <button class="level__button_again" id="start-over-button">Начать игру</button>
     </div>
     <div class="render-cards"></div>
-    <a class="back-link">Вернуться назад</a>
   </div>
   `;
 
     gamePage.innerHTML = levelHtml;
 
     const renderCardsElement = document.querySelector(".render-cards");
-    const backLink = document.querySelector(".back-link");
     const startOverButton = document.getElementById("start-over-button");
     let cardsCounter = 0;
 
@@ -87,151 +87,34 @@ export const renderLevelPage = ({ gamePage }) => {
     }
     shuffleCardsArray(cardsArray);
 
+    const sliceCardArray = cardsArray.slice(0, cardsCounter / 2);
+    const doubleCardArray = sliceCardArray.concat(sliceCardArray);
+    doubleCardArray.sort(() => Math.random() - 0.5);
+    const cardsInGame = [];
+
     startOverButton.addEventListener("click", () => {
         console.log(level);
-
-        const levelCardsHtml = `
-    <div class="playing-field">
-    <div class="header">
-      <div class="timer">
-      <div class="timer__text">
-      <p class="timer__text_min">min</p>
-      <p class="timer__text_sek">sek</p>
-      </div>
-        <p class="timer__numbers">00.00</p>
-      </div>
-        <button class="level__button_again" id="start-reverse-button">Начать заново</button>
-    </div>
-    <div class="render-cards"></div>
-  </div>
-    `;
-        gamePage.innerHTML = levelCardsHtml;
-
-        const renderCardsElement = document.querySelector(".render-cards");
-
-        if (level === "easy") {
-            cardsCounter = 6;
-            cardsForLevel = '<div class="cards cards__easy">';
-        } else if (level === "medium") {
-            cardsCounter = 12;
-            cardsForLevel = '<div class="cards cards__medium">';
-        } else if (level === "hard") {
-            cardsCounter = 18;
-            cardsForLevel = '<div class="cards">';
-        }
-        const sliceCardArray = cardsArray.slice(0, cardsCounter / 2);
-        const doubleCardArray = sliceCardArray.concat(sliceCardArray);
-        doubleCardArray.sort(() => Math.random() - 0.5);
-        const cardsInGame = [];
-
-        for (let i = 0; i < cardsCounter; i++) {
-            const newCard = `
-              <div class="generated-card" data-index="${i}">
-                <div class="generated-card__corner">
-                  <p class="generated-card__text">${doubleCardArray[i].rank}</p>
-                  <div class="generated-card__corner_svg">
-                  ${doubleCardArray[i].suit}
-                  </div>
-                </div>
-                <div class="generated-card__svg">
-                  ${doubleCardArray[i].suit}
-                </div>
-                <div class="generated-card__corner generated-card__corner_reverse">
-                  <p class="generated-card__text">${doubleCardArray[i].rank}</p>
-                  <div class="generated-card__corner_svg">
-                  ${doubleCardArray[i].suit}
-                  </div>
-                </div>
-              </div>`;
-            cardsForLevel += newCard;
-            cardsInGame.push(newCard);
-        }
-        cardsForLevel += "</div>";
-        renderCardsElement.innerHTML = cardsForLevel;
-        // console.log(cardsForLevel);
-        const flippedCards = document.querySelectorAll(".generated-card");
-
-        flippedCards.forEach((card) => {
-            card.classList.add("flipped");
+        renderGameField({
+            gamePage,
+            level,
+            cardsCounter,
+            cardsForLevel,
+            doubleCardArray,
+            cardsInGame,
         });
 
-        setTimeout(() => {
-            flippedCards.forEach((card) => {
-                card.innerHTML =
-                    '<img class="cards__shirt" src="static/рубашка.png" alt="рубашка"/>';
-                card.classList.remove("flipped");
-            });
-        }, 5000);
+        const flippedCards = document.querySelectorAll(".generated-card");
 
-        // let isCardFlipped;
-        let firstCard = null;
-        let secondCard = null;
-        let firstCardRank = null;
-        let firstCardSuit = null;
-        let secondCardRank = null;
-        let secondCardSuit = null;
-
-        flippedCards.forEach((card) => {
-            card.addEventListener("click", () => {
-                const index = card.dataset.index;
-                card.innerHTML = cardsInGame[index];
-                card.classList.add("flipped");
-
-                if (firstCard === null) {
-                    firstCard = card;
-                    firstCardRank = doubleCardArray[index].rank;
-                    firstCardSuit = doubleCardArray[index].suit;
-                } else if (secondCard === null) {
-                    secondCard = card;
-                    secondCardRank = doubleCardArray[index].rank;
-                    secondCardSuit = doubleCardArray[index].suit;
-                }
-
-                if (firstCard !== null && secondCard !== null) {
-                    if (
-                        firstCardRank === secondCardRank &&
-                        firstCardSuit === secondCardSuit
-                    ) {
-                        firstCard.disabled = true;
-                        secondCard.disabled = true;
-                        firstCard = null;
-                        secondCard = null;
-                    }
-                }
-
-                if (firstCard !== null && secondCard !== null) {
-                    if (
-                        firstCardRank !== secondCardRank ||
-                        firstCardSuit !== secondCardSuit
-                    ) {
-                        card.disabled = true;
-                        setTimeout(() => {
-                            alert("Вы проиграли!");
-                        }, 500);
-                    }
-                }
-                if (
-                    document.querySelectorAll(".generated-card.flipped")
-                        .length === cardsInGame.length
-                ) {
-                    setTimeout(() => {
-                        alert("Вы выиграли!");
-                    }, 500);
-                }
-                console.log(
-                    document.querySelectorAll(".generated-card.flipped"),
-                );
-                console.log(cardsInGame.length);
-            });
+        useMainGameLogic({
+            flippedCards,
+            cardsInGame,
+            doubleCardArray,
+            gamePage,
         });
 
         const reverseButton = document.getElementById("start-reverse-button");
         reverseButton.addEventListener("click", () => {
-            renderLevelPage({ gamePage });
+            renderMainPage();
         });
-    });
-
-    backLink.addEventListener("click", () => {
-        renderMainPage();
     });
 };
