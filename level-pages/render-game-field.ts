@@ -1,5 +1,5 @@
-import { useTimer } from "./timer.js";
-export let interval;
+import { useTimer } from "./timer";
+export let interval: NodeJS.Timeout;
 
 export function renderGameField({
     gamePage,
@@ -71,8 +71,10 @@ export function renderGameField({
               </div>`;
         cardsForLevel += newCard;
         cardsInGame.push(newCard);
+        console.log(typeof cardsInGame);
     }
     cardsForLevel += "</div>";
-    renderCardsElement.innerHTML = cardsForLevel;
-    // console.log(cardsForLevel);
+    if (renderCardsElement) {
+      renderCardsElement.innerHTML = cardsForLevel;
+    }
 }

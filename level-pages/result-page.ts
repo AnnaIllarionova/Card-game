@@ -1,5 +1,5 @@
-import { renderMainPage } from "./index.js";
-import { seconds, minutes } from "./timer.js";
+import { renderMainPage } from "./index";
+import { seconds, minutes } from "./timer";
 
 export function renderResultPage({ gamePage, gameWon }) {
     const resultHtml = `
@@ -21,7 +21,7 @@ export function renderResultPage({ gamePage, gameWon }) {
     gamePage.innerHTML = resultHtml;
 
     const restartButton = document.querySelector(".level__button_start");
-    restartButton.addEventListener("click", () => {
+    (restartButton as Element).addEventListener("click", () => {
         renderMainPage();
     });
 }

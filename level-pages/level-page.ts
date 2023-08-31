@@ -1,9 +1,9 @@
-//import { forEach, slice } from "lodash";
-import { renderMainPage, level } from "./index.js";
-import { renderGameField } from "./render-game-field.js";
-import { useMainGameLogic } from "./main-game-logic.js";
+// import * as _ from "lodash";
+import { renderMainPage, level } from "./index";
+import { renderGameField } from "./render-game-field";
+import { useMainGameLogic } from "./main-game-logic";
 
-export const renderLevelPage = ({ gamePage }) => {
+export const renderLevelPage = ({ gamePage }: { gamePage: any}) => {
     const levelHtml = `
   <div class="field">
     <div class="header">
@@ -20,11 +20,11 @@ export const renderLevelPage = ({ gamePage }) => {
   </div>
   `;
 
-    gamePage.innerHTML = levelHtml;
+  gamePage.innerHTML = levelHtml;
 
     const renderCardsElement = document.querySelector(".render-cards");
     const startOverButton = document.getElementById("start-over-button");
-    let cardsCounter = 0;
+    let cardsCounter: number = 0;
 
     let cardsForLevel = "";
     if (level === "easy") {
@@ -44,7 +44,10 @@ export const renderLevelPage = ({ gamePage }) => {
     }
     cardsForLevel += "</div>";
 
-    renderCardsElement.innerHTML = cardsForLevel;
+    if (renderCardsElement) {
+      renderCardsElement.innerHTML = cardsForLevel;
+    }
+    
 
     const cardRanksArrray = ["A", "K", "Q", "J", "10", "9", "8", "7", "6"];
     // const randomRank =
@@ -79,7 +82,7 @@ export const renderLevelPage = ({ gamePage }) => {
         }
     }
 
-    function shuffleCardsArray(array) {
+    function shuffleCardsArray(array: {rank: string; suit: string}[]) {
         for (let i = array.length - 1; i > 0; i--) {
             let j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
@@ -90,9 +93,9 @@ export const renderLevelPage = ({ gamePage }) => {
     const sliceCardArray = cardsArray.slice(0, cardsCounter / 2);
     const doubleCardArray = sliceCardArray.concat(sliceCardArray);
     doubleCardArray.sort(() => Math.random() - 0.5);
-    const cardsInGame = [];
+    const cardsInGame: string[] = [];
 
-    startOverButton.addEventListener("click", () => {
+    (startOverButton as HTMLElement).addEventListener("click", () => {
         console.log(level);
         renderGameField({
             gamePage,
@@ -113,7 +116,7 @@ export const renderLevelPage = ({ gamePage }) => {
         });
 
         const reverseButton = document.getElementById("start-reverse-button");
-        reverseButton.addEventListener("click", () => {
+        (reverseButton as HTMLElement).addEventListener("click", () => {
             renderMainPage();
         });
     });

@@ -1,7 +1,7 @@
 import { renderResultPage } from "./result-page";
 import { interval } from "./render-game-field";
 
-export let gameTime;
+// export let gameTime;
 export function useMainGameLogic({
     flippedCards,
     cardsInGame,
@@ -9,40 +9,49 @@ export function useMainGameLogic({
     gamePage,
 }) {
     let gameWon = false;
-    flippedCards.forEach((card) => {
+    flippedCards.forEach((card: HTMLElement) => {
         card.classList.add("flipped");
     });
 
     setTimeout(() => {
-        flippedCards.forEach((card) => {
+        flippedCards.forEach((card: HTMLElement) => {
             card.innerHTML =
                 '<img class="cards__shirt" src="static/рубашка.png" alt="рубашка"/>';
             card.classList.remove("flipped");
         });
     }, 5000);
 
-    let firstCard = null;
-    let secondCard = null;
-    let firstCardRank = null;
-    let firstCardSuit = null;
-    let secondCardRank = null;
-    let secondCardSuit = null;
+    let firstCard: Element | null = null;
+    let secondCard: Element | null = null;
+    let firstCardRank: Element | null = null;
+    let firstCardSuit: Element | null = null;
+    let secondCardRank: Element | null = null;
+    let secondCardSuit: Element | null = null;
+    console.log(typeof secondCardRank);
 
-    flippedCards.forEach((card) => {
+    flippedCards.forEach((card: HTMLElement) => {
         card.addEventListener("click", () => {
-            const index = card.dataset.index;
+            const index= card.dataset.index;
             // в  <div class="generated-card" data-index="${i}"> вставляется точно такой же див
-            card.innerHTML = cardsInGame[index];
+            if (index) {
+                card.innerHTML = cardsInGame[index];
+            }
+           
             card.classList.add("flipped");
 
             if (firstCard === null) {
                 firstCard = card;
-                firstCardRank = doubleCardArray[index].rank;
-                firstCardSuit = doubleCardArray[index].suit;
+                if (index) {
+                    firstCardRank = doubleCardArray[index].rank;
+                    firstCardSuit = doubleCardArray[index].suit;
+                }
+               
             } else if (secondCard === null) {
                 secondCard = card;
-                secondCardRank = doubleCardArray[index].rank;
-                secondCardSuit = doubleCardArray[index].suit;
+                if (index) {
+                    secondCardRank = doubleCardArray[index].rank;
+                    secondCardSuit = doubleCardArray[index].suit;
+                }
             }
 
             if (firstCard !== null && secondCard !== null) {

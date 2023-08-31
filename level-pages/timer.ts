@@ -1,4 +1,4 @@
-export let minutes = 0;
+export let minutes: number = 0;
 export let seconds = 0;
 
 export function useTimer({ secondsElement, minutesElement }) {
