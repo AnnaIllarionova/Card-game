@@ -7,14 +7,22 @@ export function useMainGameLogic({
     cardsInGame,
     doubleCardArray,
     gamePage,
+}: {
+    flippedCards: Element[];
+    cardsInGame: string[];
+    doubleCardArray: {
+        rank: string;
+        suit: string;
+    }[];
+    gamePage: Element;
 }) {
-    let gameWon = false;
-    flippedCards.forEach((card: HTMLElement) => {
+    let gameWon: boolean = false;
+    flippedCards.forEach((card: Element) => {
         card.classList.add("flipped");
     });
 
     setTimeout(() => {
-        flippedCards.forEach((card: HTMLElement) => {
+        flippedCards.forEach((card: Element) => {
             card.innerHTML =
                 '<img class="cards__shirt" src="static/рубашка.png" alt="рубашка"/>';
             card.classList.remove("flipped");
@@ -23,34 +31,30 @@ export function useMainGameLogic({
 
     let firstCard: Element | null = null;
     let secondCard: Element | null = null;
-    let firstCardRank: Element | null = null;
-    let firstCardSuit: Element | null = null;
-    let secondCardRank: Element | null = null;
-    let secondCardSuit: Element | null = null;
-    console.log(typeof secondCardRank);
-
-    flippedCards.forEach((card: HTMLElement) => {
+    let firstCardRank: string | null = null;
+    let firstCardSuit: string | null = null;
+    let secondCardRank: string | null = null;
+    let secondCardSuit: string | null = null;
+    flippedCards.forEach((card) => {
         card.addEventListener("click", () => {
-            const index= card.dataset.index;
+            const index = (card as HTMLElement).dataset.index;
             // в  <div class="generated-card" data-index="${i}"> вставляется точно такой же див
             if (index) {
-                card.innerHTML = cardsInGame[index];
+                card.innerHTML = cardsInGame[parseInt(index)];
             }
-           
             card.classList.add("flipped");
 
             if (firstCard === null) {
                 firstCard = card;
                 if (index) {
-                    firstCardRank = doubleCardArray[index].rank;
-                    firstCardSuit = doubleCardArray[index].suit;
+                    firstCardRank = doubleCardArray[parseInt(index)].rank;
+                    firstCardSuit = doubleCardArray[parseInt(index)].suit;
                 }
-               
             } else if (secondCard === null) {
                 secondCard = card;
                 if (index) {
-                    secondCardRank = doubleCardArray[index].rank;
-                    secondCardSuit = doubleCardArray[index].suit;
+                    secondCardRank = doubleCardArray[parseInt(index)].rank;
+                    secondCardSuit = doubleCardArray[parseInt(index)].suit;
                 }
             }
 

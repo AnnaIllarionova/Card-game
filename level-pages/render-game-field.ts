@@ -8,6 +8,16 @@ export function renderGameField({
     cardsForLevel,
     doubleCardArray,
     cardsInGame,
+}: {
+    gamePage: Element;
+    level: string;
+    cardsCounter: number;
+    cardsForLevel: string;
+    doubleCardArray: {
+        rank: string;
+        suit: string;
+    }[];
+    cardsInGame: string[];
 }) {
     const levelCardsHtml = `
     <div class="playing-field">
@@ -34,10 +44,14 @@ export function renderGameField({
     const minutesElement = document.querySelector(".timer__numbers_minutes");
     const secondsElement = document.querySelector(".timer__seconds");
 
-    interval = setInterval(
-        () => useTimer({ secondsElement, minutesElement }),
-        1000,
-    );
+    clearInterval(interval);
+
+    if (secondsElement && minutesElement) {
+        interval = setInterval(
+            () => useTimer({ secondsElement, minutesElement }),
+            1000,
+        );
+    }
 
     if (level === "easy") {
         cardsCounter = 6;
@@ -71,10 +85,7 @@ export function renderGameField({
               </div>`;
         cardsForLevel += newCard;
         cardsInGame.push(newCard);
-        console.log(typeof cardsInGame);
     }
     cardsForLevel += "</div>";
-    if (renderCardsElement) {
-      renderCardsElement.innerHTML = cardsForLevel;
-    }
+    (renderCardsElement as Element).innerHTML = cardsForLevel;
 }

@@ -1,9 +1,7 @@
 import { renderLevelPage } from "./level-page";
 import "./style.css";
 
-export const gamePage = document.querySelector(
-    ".difficulties.center",
-);
+export const gamePage = document.querySelector(".difficulties.center");
 
 export let level: string = "";
 
@@ -45,16 +43,22 @@ export function renderMainPage() {
                 if (levelButton.id === "easy-level") {
                     //console.log(levelButton.id);
                     level = "easy";
-                    renderLevelPage({ gamePage });
+                    if (gamePage) {
+                        renderLevelPage({ gamePage });
+                    }
                 }
 
                 if (levelButton.id === "medium-level") {
                     level = "medium";
-                    renderLevelPage({ gamePage });
+                    if (gamePage) {
+                        renderLevelPage({ gamePage });
+                    }
                 }
                 if (levelButton.id === "hard-level") {
                     level = "hard";
-                    renderLevelPage({ gamePage });
+                    if (gamePage) {
+                        renderLevelPage({ gamePage });
+                    }
                 }
             });
         });

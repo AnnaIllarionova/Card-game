@@ -1,17 +1,29 @@
-export let minutes: number = 0;
+export let minutes = 0;
 export let seconds = 0;
 
-export function useTimer({ secondsElement, minutesElement }) {
+export function useTimer({
+    secondsElement,
+    minutesElement,
+}: {
+    secondsElement: Element;
+    minutesElement: Element;
+}) {
     seconds++;
-    seconds = seconds <= 9 ? "0" + seconds : seconds;
-    secondsElement.innerHTML = seconds;
+    const zeroPlusSeconds = seconds <= 9 ? "0" + seconds : seconds.toString();
+    secondsElement.innerHTML = zeroPlusSeconds;
+
     if (seconds > 59) {
         minutes++;
-        minutesElement.innerHTML = "0" + minutes;
+        const zeroPlusMinutes =
+            minutes <= 9 ? "0" + minutes : minutes.toString();
+        minutesElement.innerHTML = zeroPlusMinutes;
         seconds = 0;
         secondsElement.innerHTML = "0" + seconds;
     }
-    if (minutes > 9) {
-        minutesElement.innerHTML = minutes;
-    }
+}
+
+export function resetTimer(interval: NodeJS.Timeout) {
+    clearInterval(interval);
+    minutes = 0;
+    seconds = 0;
 }

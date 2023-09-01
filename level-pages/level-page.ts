@@ -1,9 +1,10 @@
 // import * as _ from "lodash";
 import { renderMainPage, level } from "./index";
-import { renderGameField } from "./render-game-field";
+import { renderGameField, interval } from "./render-game-field";
 import { useMainGameLogic } from "./main-game-logic";
+import { resetTimer } from "./timer";
 
-export const renderLevelPage = ({ gamePage }: { gamePage: any}) => {
+export const renderLevelPage = ({ gamePage }: { gamePage: Element }) => {
     const levelHtml = `
   <div class="field">
     <div class="header">
@@ -20,7 +21,7 @@ export const renderLevelPage = ({ gamePage }: { gamePage: any}) => {
   </div>
   `;
 
-  gamePage.innerHTML = levelHtml;
+    gamePage.innerHTML = levelHtml;
 
     const renderCardsElement = document.querySelector(".render-cards");
     const startOverButton = document.getElementById("start-over-button");
@@ -45,10 +46,8 @@ export const renderLevelPage = ({ gamePage }: { gamePage: any}) => {
     cardsForLevel += "</div>";
 
     if (renderCardsElement) {
-      renderCardsElement.innerHTML = cardsForLevel;
+        renderCardsElement.innerHTML = cardsForLevel;
     }
-    
-
     const cardRanksArrray = ["A", "K", "Q", "J", "10", "9", "8", "7", "6"];
     // const randomRank =
     //     cardRanksArrray[Math.floor(Math.random() * cardRanksArrray.length)];
@@ -82,9 +81,9 @@ export const renderLevelPage = ({ gamePage }: { gamePage: any}) => {
         }
     }
 
-    function shuffleCardsArray(array: {rank: string; suit: string}[]) {
+    function shuffleCardsArray(array: { rank: string; suit: string }[]) {
         for (let i = array.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1));
+            const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
         }
     }
@@ -96,7 +95,9 @@ export const renderLevelPage = ({ gamePage }: { gamePage: any}) => {
     const cardsInGame: string[] = [];
 
     (startOverButton as HTMLElement).addEventListener("click", () => {
-        console.log(level);
+        // console.log(level);
+        resetTimer(interval);
+
         renderGameField({
             gamePage,
             level,
@@ -106,8 +107,9 @@ export const renderLevelPage = ({ gamePage }: { gamePage: any}) => {
             cardsInGame,
         });
 
-        const flippedCards = document.querySelectorAll(".generated-card");
-
+        const flippedCardsElements =
+            document.querySelectorAll(".generated-card");
+        const flippedCards = Array.from(flippedCardsElements);
         useMainGameLogic({
             flippedCards,
             cardsInGame,
