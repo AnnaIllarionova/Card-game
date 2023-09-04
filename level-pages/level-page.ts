@@ -3,6 +3,7 @@ import { renderMainPage, level } from "./index";
 import { renderGameField, interval } from "./render-game-field";
 import { useMainGameLogic } from "./main-game-logic";
 import { resetTimer } from "./timer";
+import { shuffleCardsArray } from "./shuffled-function";
 
 export const renderLevelPage = ({ gamePage }: { gamePage: Element }) => {
     const levelHtml = `
@@ -73,7 +74,7 @@ export const renderLevelPage = ({ gamePage }: { gamePage: Element }) => {
     ];
     // const randomSuit =
     //     cardSuitsArray[Math.floor(Math.random() * cardSuitsArray.length)];
-    const cardsArray = [];
+    let cardsArray = [];
 
     for (const suit of cardSuitsArray) {
         for (const rank of cardRanksArrray) {
@@ -81,13 +82,7 @@ export const renderLevelPage = ({ gamePage }: { gamePage: Element }) => {
         }
     }
 
-    function shuffleCardsArray(array: { rank: string; suit: string }[]) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-    }
-    shuffleCardsArray(cardsArray);
+    cardsArray = shuffleCardsArray(cardsArray);
 
     const sliceCardArray = cardsArray.slice(0, cardsCounter / 2);
     const doubleCardArray = sliceCardArray.concat(sliceCardArray);
