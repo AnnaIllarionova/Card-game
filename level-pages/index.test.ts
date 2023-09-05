@@ -3,14 +3,17 @@
  */
 import { describe, expect, test } from "@jest/globals";
 import { shuffleCardsArray } from "./shuffled-function";
+// import { minutes, useTimer } from "./timer";
 
-describe("shuffledCardArray", () => {
-    test("shuffe array", () => {
+describe("shuffleCardsArray", () => {
+    test("the original array is not equal to the shuffled one", () => {
         const array = [
             { rank: "A", suit: "spades" },
             { rank: "K", suit: "hearts" },
             { rank: "Q", suit: "clubs" },
         ];
-        expect(shuffleCardsArray(array)).not.toBe(array);
+        const originalArray = [...array];
+        const shuffledArray = shuffleCardsArray(array);
+        expect(shuffledArray).not.toBe(originalArray);
     });
 });

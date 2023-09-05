@@ -27,6 +27,7 @@
     },
     "homepage": "https://github.com/AnnaIllarionova/Card-game#readme",
     "dependencies": {
+        "@babel/preset-env": "^7.22.15",
         "cross-env": "^7.0.3",
         "http-server": "^14.1.1",
         "lodash": "^4.17.21"

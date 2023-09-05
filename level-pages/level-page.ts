@@ -49,7 +49,7 @@ export const renderLevelPage = ({ gamePage }: { gamePage: Element }) => {
     if (renderCardsElement) {
         renderCardsElement.innerHTML = cardsForLevel;
     }
-    const cardRanksArrray = ["A", "K", "Q", "J", "10", "9", "8", "7", "6"];
+    const cardRanksArray = ["A", "K", "Q", "J", "10", "9", "8", "7", "6"];
     // const randomRank =
     //     cardRanksArrray[Math.floor(Math.random() * cardRanksArrray.length)];
     const cardSuitsSvg = {
@@ -77,10 +77,12 @@ export const renderLevelPage = ({ gamePage }: { gamePage: Element }) => {
     let cardsArray = [];
 
     for (const suit of cardSuitsArray) {
-        for (const rank of cardRanksArrray) {
+        for (const rank of cardRanksArray) {
             cardsArray.push({ rank, suit });
         }
     }
+    // const originalArray = [...cardsArray];
+    // console.log(originalArray);
 
     cardsArray = shuffleCardsArray(cardsArray);
 
