@@ -1,5 +1,5 @@
 # Card-game
-find a pair
-first page - 1 hour
-transition to other pages - 1.5 hour
-SPA - 1 hour
+Main logic: find a pair;
+Added 3 game levels with different number of cards;
+Project translated to typescript;
+Added sevral unit-tests;
