@@ -1,7 +1,9 @@
-import { renderLevelPage } from "./level-page.js";
+import { renderLevelPage } from "./level-page";
+import "./style.css";
 
 export const gamePage = document.querySelector(".difficulties.center");
-export let level = "";
+
+export let level: string = "";
 
 export function renderMainPage() {
     const mainPage = `
@@ -15,40 +17,48 @@ export function renderMainPage() {
         <button class="level__button_start">Старт</button>
       </div>
     `;
-
-    gamePage.innerHTML = mainPage;
+    if (gamePage) {
+        gamePage.innerHTML = mainPage;
+    }
 
     const startButton = document.querySelector(".level__button_start");
     const levelButtons = document.querySelectorAll(".choice__button");
 
-    for (const levelButton of levelButtons) {
+    const levelButtonsArray = Array.from(levelButtons);
+
+    for (const levelButton of levelButtonsArray) {
         levelButton.addEventListener("click", () => {
             levelButton.classList.toggle("choice__button-active");
             const isActive = levelButton.classList.contains(
                 "choice__button-active",
             );
-            console.log(isActive);
 
-            for (const btn of levelButtons) {
+            for (const btn of levelButtonsArray) {
                 if (btn !== levelButton) {
-                    btn.disabled = isActive;
+                    (btn as HTMLButtonElement).disabled = isActive;
                 }
             }
 
-            startButton.addEventListener("click", () => {
+            (startButton as Element).addEventListener("click", () => {
                 if (levelButton.id === "easy-level") {
                     //console.log(levelButton.id);
                     level = "easy";
-                    renderLevelPage({ gamePage });
+                    if (gamePage) {
+                        renderLevelPage({ gamePage });
+                    }
                 }
 
                 if (levelButton.id === "medium-level") {
                     level = "medium";
-                    renderLevelPage({ gamePage });
+                    if (gamePage) {
+                        renderLevelPage({ gamePage });
+                    }
                 }
                 if (levelButton.id === "hard-level") {
                     level = "hard";
-                    renderLevelPage({ gamePage });
+                    if (gamePage) {
+                        renderLevelPage({ gamePage });
+                    }
                 }
             });
         });
